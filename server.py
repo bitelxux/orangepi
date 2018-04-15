@@ -48,7 +48,7 @@ def living_room_status():
 @app.route('/living_room/off')
 def living_room_off():
     gpio.output(living_room, 0)
-    return "living_room light is off\n"
+    return "living room light is off\n"
 
 @app.route('/all_lights/on')
 def all_on():

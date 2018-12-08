@@ -16,7 +16,7 @@ ifconfig wlan0 down
 ifconfig wlan0 up
 route add default gw $GATEWAY wlan0
 
-autossh -M 20000 -f -i /root/.ssh/id_rsa -N root@battlefield1408.tk -R 5000:localhost:5000 -C &
+autossh -M 20000 -f -i /root/.ssh/id_rsa -N root@94.177.253.187 -R 5000:localhost:5000 -C &
 python /root/server/server.py &
 
 exit 0

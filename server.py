@@ -3,21 +3,18 @@ import os
 import sys
 from flask import Flask
 
-app = Flask(__name__)
-
-if not os.getegid() == 0:
-    sys.exit('Script must be run as root')
- 
 from pyA20.gpio import gpio
 from pyA20.gpio import port
- 
+
+app = Flask(__name__)
+
 living_room = port.PA6
 kitchen = port.PA12
- 
+
 gpio.init()
 gpio.setcfg(kitchen, gpio.OUTPUT)
 gpio.setcfg(living_room, gpio.OUTPUT)
- 
+
 @app.route('/kitchen/on')
 def kitchen_on():
     gpio.output(kitchen, 1)
@@ -73,5 +70,8 @@ def all_off():
     return "All lights are off\n"
 
 if __name__ == '__main__':
-        app.run(host="0.0.0.0", threaded=True, debug=True)
+
+    if not os.getegid() == 0:
+        sys.exit('Script must be run as root')
+    app.run(host="0.0.0.0", threaded=True, debug=True)
 
